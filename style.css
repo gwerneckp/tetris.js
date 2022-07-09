@@ -1,0 +1,60 @@
+:root {
+    --padding: 20px;
+}
+
+@font-face {
+    font-family: "Consolas";
+    src: url(../assets/fonts/Consolas.woff2) format("woff2");
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #000000;
+}
+
+h1 {
+    color: #41ff00;
+    font-family: "Consolas";
+}
+
+p {
+    font-family: "Consolas";
+    color: #41ff00;
+    margin: 6px;
+}
+
+.game-line {
+    /*       font-size: 18px; */
+    letter-spacing: 4.5px;
+}
+
+.green {
+    color: #41ff00;
+}
+
+.red {
+    color: #cc0000;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.vertical-center {
+    /* margin: flex;
+    width: 50%;
+    padding: 10px; */
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    flex:1;
+    display: flex;
+    justify-content: center;
+}
+
+.padding {
+    padding: var(--padding);
+}

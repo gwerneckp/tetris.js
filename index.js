@@ -34,19 +34,13 @@ async function gameOverAnimation(){
       lineOutput = []
       for(x in matrix[y]){     
         if(matrix[y][x] == 0){
-        // lineOutput += [" &nbsp "]
         lineOutput += [" &nbsp "]
-        // lineOutput += [" &nbsp "]
         }
         if(matrix[y][x] == 1){
-        // lineOutput += [" &nbsp "]
         lineOutput += [" - "]
-        // lineOutput += [" &nbsp "]
         }
         if(matrix[y][x] == 2){
-        // lineOutput += [" &nbsp "]
         lineOutput += [" o "]
-        // lineOutput += [" &nbsp "]
         }      
       }
       $('#game').html($('#game').html()+"<p class='text-center red game-line'>"+lineOutput+"</p>")

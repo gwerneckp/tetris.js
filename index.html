@@ -1,103 +1,55 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="icon" href="assets/icon/icon.png"><link>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="assets/icon/icon.png" />
+    <link />
     <title>Command Line Tetris</title>
-    <link href="bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
-  
-  <style>
-    @font-face {
-      font-family: 'Consolas';
-      src: url(../assets/fonts/Consolas.woff2) format('woff2');
-    }
-    body{
-      overflow-x: hidden
-    }
-    h1{
-      color:#41FF00;
-      font-family: 'Consolas';
-    }
-    p{
-      font-family: 'Consolas';
-      color:#41FF00;
-      margin:3px;
-    } 
-    .game-line{
-/*       font-size: 18px; */
-      letter-spacing:4.5px;
-    }
-    .green{
-      color:#41ff00;
-    }
-    .red{
-      color:#cc0000;
-    }
-    .vertical-center {
-      margin: auto;
-      width: 50%;
-      padding: 10px;
-    }
-  </style>
-  
-  <body style="background-color:#000000">
-    
-    <p id=log style="display: block;">
-    </p>
-  
-    <div id=gameRow  style="display: none;">
+  <body>
+    <p id="log"></p>
 
-      <div style="padding:20px;">
+    <div id="gameRow" style="display: none">
+      <div class='center'>
+      <h1>&ltscript src=tetris.js&gt</h1>
       </div>
-      <h1 class="text-center">
-        &ltscript src=tetris.js&gt
-      </h1>
-      <div style="padding:20px;">
-      </div>
-      
-      <div class="row">
-          <div class="col-xl-4">
-              <p class="vertical-center">
-              pause game: p<br>
-              start game: "enter"<br>
-              go left: a<br>
-              go right: d<br>
-              go down: s<br>
-              rotate: w
-              </p>
-          </div>
-          <div class="col-xl-4">
-          
-            <p class="text-center" id="game"></p>
-  
-          </div>
-  
-          <div class="col-xl-4">
-            <p class="vertical-center" id=score></p>
-          </div>
+      <div class="padding"></div>
+
+      <div class="flex">
+        <div class="vertical-center center">
+          <p>
+            pause game: p<br />
+            start game: "enter"<br />
+            go left: a<br />
+            go right: d<br />
+            go down: s<br />
+            rotate: w
+          </p>
+        </div>
+        <div class="vertical-center">
+          <div class="center">
+          <p id="game"></p>
+        </div>
+        </div>
+
+        <div class="vertical-center center">
+          <p id="score"></p>
+        </div>
       </div>
 
-      <div style="padding:20px;">
-      </div>
-      <h1 class="text-center">
-        &lt/script&gt
-      </h1> 
-      
-    </div>  
-
-    
-     
+      <div class="padding"></div>
+      <div class='center'>
+      <h1>&lt/script&gt</h1>
+    </div>
+    </div>
   </body>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> 
-  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="tetris.js"></script>
   <script src="elements.js"></script>
   <script src="https://unpkg.com/typeit@8.3.3/dist/index.umd.js"></script>
   <script src="index.js"></script>
-  
 </html>
