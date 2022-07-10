@@ -23,7 +23,7 @@ Then create an instance of the Tetris class passing an empty object as an argume
 There are three customizable display methods: **displayMatrix**, **displayScore** and **displayGameOver**. Create your own implementation of them like this:</br>
 
 <pre>tetris.setDisplayMatrix((tetris) => {
-    console.log(my **matrix**: \n tetris.matrix)
+    console.log(my matrix: \n tetris.matrix)
 })</pre>
 
 The default display methods log the game data to the console.</br>
