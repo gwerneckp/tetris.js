@@ -20,7 +20,7 @@ const waiting = () => {
     }).go();
 };
 const displayDOM = (matrix) => {
-    $("#game").html("");
+    element("game").innerHTML = "";
     for (let y = 3; y < matrix.length; y++) {
         let lineOutput = "";
         for (let x in matrix[y]) {
@@ -42,7 +42,7 @@ const displayDOM = (matrix) => {
         }
         element("game").innerHTML =
             element("game").innerHTML +
-                "<p class='text-center green game-line'>" +
+                "<p class='game-line change-color'>" +
                 lineOutput +
                 "</p>";
     }
@@ -51,7 +51,7 @@ const displayScoreDOM = (score) => {
     element("score").innerHTML = "Score: " + score;
 };
 const waitingGameOver = () => {
-    $("#log").html("");
+    element("log").innerHTML = "";
     //@ts-ignore
     new TypeIt("#log", {
         strings: [
@@ -64,12 +64,14 @@ const waitingGameOver = () => {
 };
 const gameOverAnimation = (tetris) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    yield $(".green").addClass("red").removeClass("green");
-    $("p").css("color", "#cc0000");
-    $("h1").css("color", "#cc0000");
+    const collection = document.getElementsByClassName("change-color");
+    for (let i = 0; i < collection.length; i++) {
+        let element = collection[i];
+        element.style.color = "#cc0000";
+    }
     yield tetris.sleep(1250);
     for (let i = 1; i < tetris.matrix.length; i++) {
-        $("#game").html("");
+        element("game").innerHTML = "";
         for (let y = 3; y < tetris.matrix.length - i; y++) {
             let lineOutput = "";
             for (let x in tetris.matrix[y]) {
@@ -85,17 +87,18 @@ const gameOverAnimation = (tetris) => __awaiter(void 0, void 0, void 0, function
             }
             element("game").innerHTML =
                 ((_a = element("game")) === null || _a === void 0 ? void 0 : _a.innerHTML) +
-                    "<p class='text-center red game-line'>" +
+                    "<p class='game-line red'>" +
                     lineOutput +
                     "</p>";
         }
         yield tetris.sleep(75);
     }
-    $("p").css("color", "#41FF00");
-    $("h1").css("color", "#41FF00");
-    $(".red").addClass("green").removeClass("red");
-    $("#gameRow").hide();
-    $("#log").show();
+    for (let i = 0; i < collection.length; i++) {
+        let element = collection[i];
+        element.style.color = "#41FF00";
+    }
+    element("gameRow").style.display = "none";
+    element("log").style.display = "block";
 });
 let tetris = new Tetris({
     displayMatrix: displayDOM,
@@ -143,9 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
             case "n":
                 if (!tetris.gameRunning) {
                     tetris.startGame();
-                    $("#log").hide();
-                    $("#gameRow").show();
-                    $("#game-over").hide();
+                    element("log").style.display = 'none';
+                    element("gameRow").style.display = 'block';
                 }
                 break;
             default:

@@ -23,17 +23,12 @@ p {
     margin: 6px;
 }
 
-.game-line {
-    /*       font-size: 18px; */
-    letter-spacing: 4.5px;
-}
-
-.green {
-    color: #41ff00;
-}
-
 .red {
     color: #cc0000;
+}
+
+.game-line {
+    letter-spacing: 4.5px;
 }
 
 .flex {

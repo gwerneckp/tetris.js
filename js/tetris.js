@@ -222,15 +222,14 @@ class Tetris {
         }
     }
     checkForGameOver() {
-        return __awaiter(this, void 0, void 0, function* () {
-            for (let i = 1; i < this.matrix[3].length - 1; i++) {
-                if (this.matrix[3][i] == 1) {
-                    this.pauseGame();
-                    this.displayGameOver(this);
-                    break;
-                }
+        for (let i = 1; i < this.matrix[3].length - 1; i++) {
+            if (this.matrix[3][i] == 1) {
+                this.pauseGame();
+                this.displayGameOver(this);
+                return true;
             }
-        });
+        }
+        return false;
     }
     changeBlock(x, y, value) {
         //changes block to value
@@ -300,7 +299,9 @@ class Tetris {
                 result = "placed"; //function returns "placed"
             }
             this.checkForTetris();
-            this.checkForGameOver();
+            if (this.checkForGameOver()) {
+                return 'over';
+            }
         }
         else {
             for (var i in this.element.points) {
@@ -323,11 +324,14 @@ class Tetris {
             this.gameRunning = true;
             this.displayMatrix(this.matrix);
             while (this.gameRunning === true) {
-                if (this.fallElement() != "falling") {
+                let elementState = this.fallElement();
+                if (elementState === "placed") {
                     this.createElement();
                 }
-                yield this.sleep(this.gameSpeed);
-                this.displayMatrix(this.matrix);
+                if (elementState != "over") {
+                    yield this.sleep(this.gameSpeed);
+                    this.displayMatrix(this.matrix);
+                }
             }
         });
     }

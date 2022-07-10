@@ -12,7 +12,7 @@ const waiting = () => {
 };
 
 const displayDOM = (matrix: Array<Array<number>>) => {
-  $("#game").html("");
+  element("game")!.innerHTML = "";
   for (let y = 3; y < matrix.length; y++) {
     let lineOutput: string = "";
     for (let x in matrix[y]) {
@@ -34,7 +34,7 @@ const displayDOM = (matrix: Array<Array<number>>) => {
     }
     element("game")!.innerHTML =
       element("game")!.innerHTML +
-      "<p class='text-center green game-line'>" +
+      "<p class='game-line change-color'>" +
       lineOutput +
       "</p>";
   }
@@ -45,7 +45,7 @@ const displayScoreDOM = (score: number) => {
 };
 
 const waitingGameOver = () => {
-  $("#log").html("");
+  element("log")!.innerHTML = "";
   //@ts-ignore
   new TypeIt("#log", {
     strings: [
@@ -58,12 +58,14 @@ const waitingGameOver = () => {
 };
 
 const gameOverAnimation = async (tetris: any) => {
-  await $(".green").addClass("red").removeClass("green");
-  $("p").css("color", "#cc0000");
-  $("h1").css("color", "#cc0000");
+  const collection = document.getElementsByClassName("change-color");
+  for (let i = 0; i < collection.length; i++) {
+    let element = collection[i] as HTMLElement;
+    element.style.color = "#cc0000";
+  }
   await tetris.sleep(1250);
   for (let i = 1; i < tetris.matrix.length; i++) {
-    $("#game").html("");
+    element("game")!.innerHTML = "";
     for (let y = 3; y < tetris.matrix.length - i; y++) {
       let lineOutput = "";
       for (let x in tetris.matrix[y]) {
@@ -79,17 +81,18 @@ const gameOverAnimation = async (tetris: any) => {
       }
       element("game")!.innerHTML =
         element("game")?.innerHTML +
-        "<p class='text-center red game-line'>" +
+        "<p class='game-line red'>" +
         lineOutput +
         "</p>";
     }
     await tetris.sleep(75);
   }
-  $("p").css("color", "#41FF00");
-  $("h1").css("color", "#41FF00");
-  $(".red").addClass("green").removeClass("red");
-  $("#gameRow").hide();
-  $("#log").show();
+  for (let i = 0; i < collection.length; i++) {
+    let element = collection[i] as HTMLElement;
+    element.style.color = "#41FF00";
+  }
+  element("gameRow")!.style.display = "none";
+  element("log")!.style.display = "block";
 };
 
 let tetris = new Tetris({
@@ -140,9 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
       case "n":
         if (!tetris.gameRunning) {
           tetris.startGame();
-          $("#log").hide();
-          $("#gameRow").show();
-          $("#game-over").hide();
+          element("log")!.style.display = 'none';
+          element("gameRow")!.style.display = 'block'
         }
         break;
       default:
