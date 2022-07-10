@@ -14,7 +14,7 @@ Classic Tetris game implemented in Typescript with a console-like web GUI. <br>
 Start off by adding both **tetris.js** and **elements.js** to your project<br>
 
 <pre><<span>script src="js/tetris.js"></script>
-<<span>script src="js/elements.js"></script>q</pre>
+<<span>script src="js/elements.js"></script></pre>
 
 Then create an instance of the Tetris class passing an empty object as an argument.</br>
 
