@@ -109,9 +109,6 @@ let tetris = new Tetris({
 });
 document.addEventListener("DOMContentLoaded", () => {
     var _a;
-    // tetris.setDisplayMatrix(displayDOM);
-    // tetris.setDisplayScore(displayScoreDOM);
-    // tetris.setDisplayGameOver(gameOverAnimation);
     waiting();
     (_a = element("body")) === null || _a === void 0 ? void 0 : _a.addEventListener("keypress", (e) => {
         switch (e.key) {
@@ -146,10 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 break;
             case "n":
-                if (!tetris.gameRunning && element('log').style.display != 'none') {
+                if (!tetris.gameRunning && element("log").style.display != "none") {
                     tetris.newGame();
-                    element("log").style.display = 'none';
-                    element("gameRow").style.display = 'block';
+                    element("log").style.display = "none";
+                    element("gameRow").style.display = "block";
                 }
                 break;
             default:

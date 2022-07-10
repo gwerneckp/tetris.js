@@ -11,14 +11,14 @@ const waiting = () => {
   }).go();
 };
 
-const waitingGameOver = (score:number, highScore:number) => {
+const waitingGameOver = (score: number, highScore: number) => {
   element("log")!.innerHTML = "";
   //@ts-ignore
   new TypeIt("#log", {
     strings: [
       "game over",
-      "you scored "+score+" points",
-      "your high score is "+highScore,
+      "you scored " + score + " points",
+      "your high score is " + highScore,
       "press n to try again...",
     ],
     speed: 85,
@@ -58,7 +58,6 @@ const displayScoreDOM = (tetris: any) => {
   element("score")!.innerHTML = "Score: " + tetris.score;
 };
 
-
 const gameOverAnimation = async (tetris: any) => {
   const collection = document.getElementsByClassName("change-color");
   for (let i = 0; i < collection.length; i++) {
@@ -95,7 +94,7 @@ const gameOverAnimation = async (tetris: any) => {
   }
   element("gameRow")!.style.display = "none";
   element("log")!.style.display = "block";
-  waitingGameOver(tetris.score, tetris.highScore)
+  waitingGameOver(tetris.score, tetris.highScore);
 };
 
 let tetris = new Tetris({
@@ -104,9 +103,6 @@ let tetris = new Tetris({
   displayGameOver: gameOverAnimation,
 });
 document.addEventListener("DOMContentLoaded", () => {
-  // tetris.setDisplayMatrix(displayDOM);
-  // tetris.setDisplayScore(displayScoreDOM);
-  // tetris.setDisplayGameOver(gameOverAnimation);
   waiting();
   element("body")?.addEventListener("keypress", (e) => {
     switch (e.key) {
@@ -144,10 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         break;
       case "n":
-        if (!tetris.gameRunning && element('log')!.style.display != 'none') {
+        if (!tetris.gameRunning && element("log")!.style.display != "none") {
           tetris.newGame();
-          element("log")!.style.display = 'none';
-          element("gameRow")!.style.display = 'block'
+          element("log")!.style.display = "none";
+          element("gameRow")!.style.display = "block";
         }
         break;
       default:
