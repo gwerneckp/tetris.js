@@ -11,16 +11,17 @@ const waiting = () => {
   }).go();
 };
 
-const waitingGameOver = () => {
+const waitingGameOver = (score:number, highScore:number) => {
   element("log")!.innerHTML = "";
   //@ts-ignore
   new TypeIt("#log", {
     strings: [
       "game over",
-      "you scored " + " points",
+      "you scored "+score+" points",
+      "your high score is "+highScore,
       "press n to try again...",
     ],
-    speed: 125,
+    speed: 85,
   }).go();
 };
 
@@ -94,6 +95,7 @@ const gameOverAnimation = async (tetris: any) => {
   }
   element("gameRow")!.style.display = "none";
   element("log")!.style.display = "block";
+  waitingGameOver(tetris.score, tetris.highScore)
 };
 
 let tetris = new Tetris({
@@ -142,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         break;
       case "n":
-        if (!tetris.gameRunning) {
-          tetris.startGame();
+        if (!tetris.gameRunning && element('log')!.style.display != 'none') {
+          tetris.newGame();
           element("log")!.style.display = 'none';
           element("gameRow")!.style.display = 'block'
         }

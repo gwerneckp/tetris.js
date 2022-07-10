@@ -19,16 +19,17 @@ const waiting = () => {
         speed: 75,
     }).go();
 };
-const waitingGameOver = () => {
+const waitingGameOver = (score, highScore) => {
     element("log").innerHTML = "";
     //@ts-ignore
     new TypeIt("#log", {
         strings: [
             "game over",
-            "you scored " + " points",
+            "you scored " + score + " points",
+            "your high score is " + highScore,
             "press n to try again...",
         ],
-        speed: 125,
+        speed: 85,
     }).go();
 };
 const displayDOM = (tetris) => {
@@ -99,6 +100,7 @@ const gameOverAnimation = (tetris) => __awaiter(void 0, void 0, void 0, function
     }
     element("gameRow").style.display = "none";
     element("log").style.display = "block";
+    waitingGameOver(tetris.score, tetris.highScore);
 });
 let tetris = new Tetris({
     displayMatrix: displayDOM,
@@ -144,8 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 break;
             case "n":
-                if (!tetris.gameRunning) {
-                    tetris.startGame();
+                if (!tetris.gameRunning && element('log').style.display != 'none') {
+                    tetris.newGame();
                     element("log").style.display = 'none';
                     element("gameRow").style.display = 'block';
                 }

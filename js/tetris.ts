@@ -6,8 +6,9 @@ interface DisplayArguments {
 
 class Tetris {
   gameRunning: boolean;
-  matrix: Array<Array<number>>;
-  score: number;
+  matrix: Array<Array<number>> = [[]];
+  score: number = 0;
+  highScore: number
   gameSpeed: number;
   element: any;
   displayMatrix: Function;
@@ -19,35 +20,7 @@ class Tetris {
     displayGameOver,
   }: DisplayArguments) {
     this.gameRunning = false;
-    this.matrix = [
-      // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 (x)
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //0
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //1
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //2
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //3
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //4
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //5
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //6
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //7
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //8
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //9
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //10
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //11
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //12
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //13
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //14
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //15
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //16
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //17
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //18
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //19
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //20
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //21
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //22
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //23
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //24
-    ]; //(y)
-    this.score = 0;
+    this.highScore = 0;
     this.gameSpeed = 150;
     this.element = null;
     if (displayMatrix) {
@@ -65,7 +38,6 @@ class Tetris {
     } else {
       this.displayGameOver = (tetris: any) => {this.logGameOver(tetris);};
     }
-    this.createElement();
   }
 
   setDisplayMatrix(method: Function) {
@@ -79,6 +51,7 @@ class Tetris {
   setDisplayGameOver(method: Function) {
     this.displayGameOver = method;
   }
+
 
   sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -115,6 +88,13 @@ class Tetris {
 
   logGameOver(tetris: any) {
     console.log("Game Over! You scored " + tetris.score + " points.");
+  }
+
+  incrementScore(){
+    this.score += 1
+    if(this.score > this.highScore){
+      this.highScore = this.score
+    }
   }
 
   getBlock(x: number, y: number): number {
@@ -236,7 +216,7 @@ class Tetris {
             this.matrix[k],
           ];
         }
-        this.score += 1;
+        this.incrementScore()    
         this.displayScore(this);
       }
     }
@@ -354,6 +334,7 @@ class Tetris {
   async startGame() {
     this.gameRunning = true;
     this.displayMatrix(this);
+    this.displayScore(this)
     while (this.gameRunning === true) {
       let elementState = this.fallElement()
       if (elementState === "placed") {
@@ -364,5 +345,39 @@ class Tetris {
         this.displayMatrix(this);
       }
     }
+  }
+
+  newGame() {
+    this.matrix = [
+      // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 (x)
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //0
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //1
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //2
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //3
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //4
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //5
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //6
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //7
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //8
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //9
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //10
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //11
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //12
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //13
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //14
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //15
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //16
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //17
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //18
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //19
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //20
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //21
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //22
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], //23
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //24
+    ]; //(y)
+    this.score = 0;
+    this.createElement();
+    this.startGame()
   }
 }
