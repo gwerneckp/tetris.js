@@ -11,22 +11,35 @@ const waiting = () => {
   }).go();
 };
 
-const displayDOM = (matrix: Array<Array<number>>) => {
+const waitingGameOver = () => {
+  element("log")!.innerHTML = "";
+  //@ts-ignore
+  new TypeIt("#log", {
+    strings: [
+      "game over",
+      "you scored " + " points",
+      "press n to try again...",
+    ],
+    speed: 125,
+  }).go();
+};
+
+const displayDOM = (tetris: any) => {
   element("game")!.innerHTML = "";
-  for (let y = 3; y < matrix.length; y++) {
+  for (let y = 3; y < tetris.matrix.length; y++) {
     let lineOutput: string = "";
-    for (let x in matrix[y]) {
-      if (matrix[y][x] == 0) {
+    for (let x in tetris.matrix[y]) {
+      if (tetris.matrix[y][x] == 0) {
         // lineOutput += [" &nbsp "]
         lineOutput += " &nbsp ";
         // lineOutput += [" &nbsp "]
       }
-      if (matrix[y][x] == 1) {
+      if (tetris.matrix[y][x] == 1) {
         // lineOutput += [" &nbsp "]
         lineOutput += " - ";
         // lineOutput += [" &nbsp "]
       }
-      if (matrix[y][x] == 2) {
+      if (tetris.matrix[y][x] == 2) {
         // lineOutput += [" &nbsp "]
         lineOutput += " o ";
         // lineOutput += [" &nbsp "]
@@ -40,22 +53,10 @@ const displayDOM = (matrix: Array<Array<number>>) => {
   }
 };
 
-const displayScoreDOM = (score: number) => {
-  element("score")!.innerHTML = "Score: " + score;
+const displayScoreDOM = (tetris: any) => {
+  element("score")!.innerHTML = "Score: " + tetris.score;
 };
 
-const waitingGameOver = () => {
-  element("log")!.innerHTML = "";
-  //@ts-ignore
-  new TypeIt("#log", {
-    strings: [
-      "game over",
-      "you scored " + " points",
-      "press n to try again...",
-    ],
-    speed: 125,
-  }).go();
-};
 
 const gameOverAnimation = async (tetris: any) => {
   const collection = document.getElementsByClassName("change-color");

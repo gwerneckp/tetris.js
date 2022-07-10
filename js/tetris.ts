@@ -53,12 +53,12 @@ class Tetris {
     if (displayMatrix) {
       this.displayMatrix = displayMatrix;
     } else {
-      this.displayMatrix = (matrix: Array<Array<number>>) => {this.logMatrix(matrix);};
+      this.displayMatrix = (tetris: any) => {this.logMatrix(tetris);};
     }
     if (displayScore) {
       this.displayScore = displayScore;
     } else {
-      this.displayScore = (score: number) => {this.logScore(score);};
+      this.displayScore = (tetris: any) => {this.logScore(tetris);};
     }
     if (displayGameOver) {
       this.displayGameOver = displayGameOver;
@@ -86,20 +86,20 @@ class Tetris {
 
   rotate() {
     this.element.rotate();
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
   }
-  logMatrix(matrix: Array<Array<number>>): void {
+  logMatrix(tetris: any): void {
     console.clear();
     let gameOutput = "";
-    for (let y in matrix) {
-      for (let x in matrix[y]) {
-        if (matrix[y][x] == 0) {
+    for (let y in tetris.matrix) {
+      for (let x in tetris.matrix[y]) {
+        if (tetris.matrix[y][x] == 0) {
           gameOutput += "   ";
         }
-        if (matrix[y][x] == 1) {
+        if (tetris.matrix[y][x] == 1) {
           gameOutput += " - ";
         }
-        if (matrix[y][x] == 2) {
+        if (tetris.matrix[y][x] == 2) {
           gameOutput += " o ";
         }
       }
@@ -109,8 +109,8 @@ class Tetris {
     console.log("");
   }
 
-  logScore(score: number) {
-    console.log("You have " + score + " points.");
+  logScore(tetris: any) {
+    console.log("You have " + tetris.score + " points.");
   }
 
   logGameOver(tetris: any) {
@@ -142,7 +142,7 @@ class Tetris {
         this.element.points[i].x = newX;
       }
     }
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
   }
 
   goRight(): void {
@@ -165,7 +165,7 @@ class Tetris {
         this.element.points[i].x = newX;
       }
     }
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
   }
 
   swap(a: number, b: number): void {
@@ -237,7 +237,7 @@ class Tetris {
           ];
         }
         this.score += 1;
-        this.displayScore(this.score);
+        this.displayScore(this);
       }
     }
   }
@@ -342,18 +342,18 @@ class Tetris {
         result = "falling"; //function returns "falling"
       }
     }
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
     return result;
   }
 
   pauseGame() {
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
     this.gameRunning = false;
   }
 
   async startGame() {
     this.gameRunning = true;
-    this.displayMatrix(this.matrix);
+    this.displayMatrix(this);
     while (this.gameRunning === true) {
       let elementState = this.fallElement()
       if (elementState === "placed") {
@@ -361,7 +361,7 @@ class Tetris {
       }
       if (elementState != "over"){
         await this.sleep(this.gameSpeed);
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
       }
     }
   }

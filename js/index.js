@@ -19,22 +19,34 @@ const waiting = () => {
         speed: 75,
     }).go();
 };
-const displayDOM = (matrix) => {
+const waitingGameOver = () => {
+    element("log").innerHTML = "";
+    //@ts-ignore
+    new TypeIt("#log", {
+        strings: [
+            "game over",
+            "you scored " + " points",
+            "press n to try again...",
+        ],
+        speed: 125,
+    }).go();
+};
+const displayDOM = (tetris) => {
     element("game").innerHTML = "";
-    for (let y = 3; y < matrix.length; y++) {
+    for (let y = 3; y < tetris.matrix.length; y++) {
         let lineOutput = "";
-        for (let x in matrix[y]) {
-            if (matrix[y][x] == 0) {
+        for (let x in tetris.matrix[y]) {
+            if (tetris.matrix[y][x] == 0) {
                 // lineOutput += [" &nbsp "]
                 lineOutput += " &nbsp ";
                 // lineOutput += [" &nbsp "]
             }
-            if (matrix[y][x] == 1) {
+            if (tetris.matrix[y][x] == 1) {
                 // lineOutput += [" &nbsp "]
                 lineOutput += " - ";
                 // lineOutput += [" &nbsp "]
             }
-            if (matrix[y][x] == 2) {
+            if (tetris.matrix[y][x] == 2) {
                 // lineOutput += [" &nbsp "]
                 lineOutput += " o ";
                 // lineOutput += [" &nbsp "]
@@ -47,20 +59,8 @@ const displayDOM = (matrix) => {
                 "</p>";
     }
 };
-const displayScoreDOM = (score) => {
-    element("score").innerHTML = "Score: " + score;
-};
-const waitingGameOver = () => {
-    element("log").innerHTML = "";
-    //@ts-ignore
-    new TypeIt("#log", {
-        strings: [
-            "game over",
-            "you scored " + " points",
-            "press n to try again...",
-        ],
-        speed: 125,
-    }).go();
+const displayScoreDOM = (tetris) => {
+    element("score").innerHTML = "Score: " + tetris.score;
 };
 const gameOverAnimation = (tetris) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;

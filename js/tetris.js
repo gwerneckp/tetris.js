@@ -46,13 +46,13 @@ class Tetris {
             this.displayMatrix = displayMatrix;
         }
         else {
-            this.displayMatrix = (matrix) => { this.logMatrix(matrix); };
+            this.displayMatrix = (tetris) => { this.logMatrix(tetris); };
         }
         if (displayScore) {
             this.displayScore = displayScore;
         }
         else {
-            this.displayScore = (score) => { this.logScore(score); };
+            this.displayScore = (tetris) => { this.logScore(tetris); };
         }
         if (displayGameOver) {
             this.displayGameOver = displayGameOver;
@@ -76,20 +76,20 @@ class Tetris {
     }
     rotate() {
         this.element.rotate();
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
     }
-    logMatrix(matrix) {
+    logMatrix(tetris) {
         console.clear();
         let gameOutput = "";
-        for (let y in matrix) {
-            for (let x in matrix[y]) {
-                if (matrix[y][x] == 0) {
+        for (let y in tetris.matrix) {
+            for (let x in tetris.matrix[y]) {
+                if (tetris.matrix[y][x] == 0) {
                     gameOutput += "   ";
                 }
-                if (matrix[y][x] == 1) {
+                if (tetris.matrix[y][x] == 1) {
                     gameOutput += " - ";
                 }
-                if (matrix[y][x] == 2) {
+                if (tetris.matrix[y][x] == 2) {
                     gameOutput += " o ";
                 }
             }
@@ -98,8 +98,8 @@ class Tetris {
         console.log(gameOutput);
         console.log("");
     }
-    logScore(score) {
-        console.log("You have " + score + " points.");
+    logScore(tetris) {
+        console.log("You have " + tetris.score + " points.");
     }
     logGameOver(tetris) {
         console.log("Game Over! You scored " + tetris.score + " points.");
@@ -128,7 +128,7 @@ class Tetris {
                 this.element.points[i].x = newX;
             }
         }
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
     }
     goRight() {
         let somethingRight = false;
@@ -150,7 +150,7 @@ class Tetris {
                 this.element.points[i].x = newX;
             }
         }
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
     }
     swap(a, b) {
         [this.element.points[a], this.element.points[b]] = [
@@ -217,7 +217,7 @@ class Tetris {
                     ];
                 }
                 this.score += 1;
-                this.displayScore(this.score);
+                this.displayScore(this);
             }
         }
     }
@@ -312,17 +312,17 @@ class Tetris {
                 result = "falling"; //function returns "falling"
             }
         }
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
         return result;
     }
     pauseGame() {
-        this.displayMatrix(this.matrix);
+        this.displayMatrix(this);
         this.gameRunning = false;
     }
     startGame() {
         return __awaiter(this, void 0, void 0, function* () {
             this.gameRunning = true;
-            this.displayMatrix(this.matrix);
+            this.displayMatrix(this);
             while (this.gameRunning === true) {
                 let elementState = this.fallElement();
                 if (elementState === "placed") {
@@ -330,7 +330,7 @@ class Tetris {
                 }
                 if (elementState != "over") {
                     yield this.sleep(this.gameSpeed);
-                    this.displayMatrix(this.matrix);
+                    this.displayMatrix(this);
                 }
             }
         });
