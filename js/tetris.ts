@@ -339,6 +339,8 @@ class Tetris {
       let elementState = this.fallElement()
       if (elementState === "placed") {
         this.createElement();
+        this.displayMatrix(this);
+        await this.sleep(this.gameSpeed * 3)
       }
       if (elementState != "over"){
         await this.sleep(this.gameSpeed);

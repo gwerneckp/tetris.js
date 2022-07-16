@@ -59,6 +59,7 @@ const displayScoreDOM = (tetris: any) => {
 };
 
 const gameOverAnimation = async (tetris: any) => {
+  element("game")!.dataset.animation = "true";
   const collection = document.getElementsByClassName("change-color");
   for (let i = 0; i < collection.length; i++) {
     let element = collection[i] as HTMLElement;
@@ -92,6 +93,7 @@ const gameOverAnimation = async (tetris: any) => {
     let element = collection[i] as HTMLElement;
     element.style.color = "#41FF00";
   }
+  element("game")!.dataset.animation = "false";
   element("gameRow")!.style.display = "none";
   element("log")!.style.display = "block";
   waitingGameOver(tetris.score, tetris.highScore);
@@ -105,49 +107,55 @@ let tetris = new Tetris({
 document.addEventListener("DOMContentLoaded", () => {
   waiting();
   element("body")?.addEventListener("keypress", (e) => {
-    switch (e.key) {
-      case "a":
-        if (tetris.gameRunning) {
-          tetris.goLeft();
-        }
-        break;
-      case "d":
-        if (tetris.gameRunning) {
-          tetris.goRight();
-        }
-        break;
+    if (element("game")!.dataset.animation != "true") {
+      switch (e.key) {
+        case "a":
+          if (tetris.gameRunning) {
+            tetris.goLeft();
+          }
+          break;
+        case "d":
+          if (tetris.gameRunning) {
+            tetris.goRight();
+          }
+          break;
 
-      case "w":
-        if (tetris.gameRunning) {
-          tetris.rotate();
-        }
-        break;
+        case "w":
+          if (tetris.gameRunning) {
+            tetris.rotate();
+          }
+          break;
 
-      case "s":
-        if (tetris.gameRunning) {
-          tetris.fallElement();
-        }
-        break;
-      case "Enter":
-        if (!tetris.gameRunning) {
-          tetris.startGame();
-        }
-        break;
+        case "s":
+          if (tetris.gameRunning) {
+            tetris.fallElement();
+          }
+          break;
+        case "Enter":
+          if (!tetris.gameRunning) {
+            tetris.startGame();
+          }
+          break;
 
-      case "p":
-        if (tetris.gameRunning) {
-          tetris.pauseGame();
-        }
-        break;
-      case "n":
-        if (!tetris.gameRunning && element("log")!.style.display != "none") {
-          tetris.newGame();
-          element("log")!.style.display = "none";
-          element("gameRow")!.style.display = "block";
-        }
-        break;
-      default:
-        break;
+        case "p":
+          if (tetris.gameRunning) {
+            tetris.pauseGame();
+          }
+          break;
+        case "n":
+          if (!tetris.gameRunning) {
+            if (element("log")!.style.display != "none") {
+              tetris.newGame();
+              element("log")!.style.display = "none";
+              element("gameRow")!.style.display = "block";
+            } else {
+              tetris.newGame();
+            }
+          }
+          break;
+        default:
+          break;
+      }
     }
   });
 });
