@@ -1,60 +1,76 @@
 :root {
-    --padding: 20px;
+  --padding: 20px;
 }
 
 @font-face {
-    font-family: "Consolas";
-    src: url(../assets/fonts/Consolas.woff2) format("woff2");
+  font-family: "Consolas";
+  src: url(../assets/fonts/Consolas.woff2) format("woff2");
 }
 
 body {
-    overflow-x: hidden;
-    background-color: #000000;
-    height: 100fr;    
+  overflow-x: hidden;
+  background-color: #000000;
+  height: 100fr;
 }
 
-h1, p, a, label {
-    color: #41ff00;
-    font-family: "Consolas";
+h1,
+p,
+a,
+label {
+  color: #41ff00;
+  font-family: "Consolas";
 }
 
 p {
-    margin: 6px;
-}
-
-.red {
-    color: #cc0000;
-}
-
-.game-line {
-    letter-spacing: 4.5px;
-}
-
-.flex {
-    display: flex;
-    justify-content: space-around;
-}
-
-.vertical-center {
-    /* margin: flex;
-    width: 50%;
-    padding: 10px; */
-    display: flex;
-    align-items: center;
-}
-
-.center {
-    flex:1;
-    display: flex;
-    justify-content: center;
-}
-
-.padding {
-    padding: var(--padding);
+  margin: 6px;
 }
 
 /* input styling for color selector with a black border */
 input[type="color"] {
-    background-color: black;
-    border: transparent;
+  background-color: black;
+  border: transparent;
+}
+
+.red {
+  color: #cc0000;
+}
+
+.game-line {
+  letter-spacing: 4.5px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.vertical-center {
+  /* margin: flex;
+    width: 50%;
+    padding: 10px; */
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.padding {
+  padding: var(--padding);
+}
+
+.pi {
+  position: absolute;
+  color: white;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.pi:hover {
+    cursor: pointer;
 }

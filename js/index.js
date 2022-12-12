@@ -163,3 +163,53 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+let holdingCtrl = false;
+let holdingShift = false;
+document.addEventListener("keydown", (e) => {
+    if (e.key == "Control") {
+        holdingCtrl = true;
+    }
+    if (e.key == "Shift") {
+        holdingShift = true;
+    }
+});
+document.addEventListener("keyup", (e) => {
+    if (e.key == "Control") {
+        holdingCtrl = false;
+    }
+    if (e.key == "Shift") {
+        holdingShift = false;
+    }
+});
+let counter = 0;
+document.getElementsByClassName("pi")[0].addEventListener("click", () => {
+    if (holdingCtrl && holdingShift) {
+        // redirect to console.html
+        window.location.replace("console.html");
+        return;
+    }
+    switch (counter) {
+        case 0:
+            console.log('%c"Click on it and then press ctrl and shift"', "color: #41FF00; font-size: 10px;");
+            break;
+        case 1:
+            console.log("%cAngela was never really good at following orders", "font-style: italic; font-size: 10px;");
+            break;
+        case 2:
+            console.log("%cI'm not sure why you're still here...", "font-size: 10px;");
+            break;
+        case 3:
+            console.log('%c"Trying the same thing over and over again and expecting different results is the definition of insanity" - Albert Einstein', "font-weight: bold;");
+            break;
+        case 4:
+            console.log("%cReally?%c Have you never watched %cThe Net%c?", "font-size: 12px;", "font-size: 10px;", "text-decoration: underline; font-weight: bold;", "font-size: 10px;");
+            break;
+        case 5:
+            console.log("%cI could not make this any easier for you", "font-size: 10px;");
+            window.open("https://www.youtube.com/watch?v=pXPXMxsXT28", "_blank");
+            break;
+        default:
+            break;
+    }
+    counter++;
+});

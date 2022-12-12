@@ -147,3 +147,8 @@ colorInputs.forEach((input) => {
     }
   });
 });
+
+setTimeout(() => {
+  document.getElementsByTagName("h1")[0].innerText =
+    "Press F12 to open the console and see the game!";
+}, 3500);

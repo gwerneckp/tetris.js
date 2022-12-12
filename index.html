@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="assets/icon/icon.png" />
-    <link />
-    <title>Command Line Tetris</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-  </head>
 
-  <body id="body">
-    <p id="log"></p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" href="assets/icon/icon.png" />
+  <link />
+  <title>Command Line Tetris</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
 
-    <div id="gameRow" style="display: none">
-      <div class="center">
-        <h1 class="change-color">&ltscript src=tetris.js&gt</h1>
+<body id="body">
+  <p id="log"></p>
+
+  <div id="gameRow" style="display: none">
+    <div class="center">
+      <h1 class="change-color">&ltscript src=tetris.js&gt</h1>
+    </div>
+    <div class="padding"></div>
+
+    <div class="flex">
+      <div class="vertical-center center">
+        <p class="change-color">
+          pause game: p<br />
+          start game: enter<br />
+          new game: n<br />
+          go left: a<br />
+          go right: d<br />
+          go down: s<br />
+          rotate: w
+        </p>
       </div>
-      <div class="padding"></div>
-
-      <div class="flex">
-        <div class="vertical-center center">
-          <p class="change-color">
-            pause game: p<br />
-            start game: enter<br />
-            new game: n<br />
-            go left: a<br />
-            go right: d<br />
-            go down: s<br />
-            rotate: w
-          </p>
-        </div>
-        <div class="vertical-center">
-          <div class="center">
-            <p data-animation='false' id="game"></p>
-          </div>
-        </div>
-
-        <div class="vertical-center center">
-          <p class='change-color' id="score">score: 0</p>
+      <div class="vertical-center">
+        <div class="center">
+          <p data-animation='false' id="game"></p>
         </div>
       </div>
 
-      <div class="padding"></div>
-      <div class="center">
-        <h1 class="change-color">&lt/script&gt</h1>
+      <div class="vertical-center center">
+        <p class='change-color' id="score">score: 0</p>
       </div>
     </div>
-  </body>
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-  <script src="js/tetris.js"></script>
-  <script src="js/elements.js"></script>
-  <script src="js/typeit.js"></script>
-  <script src="js/index.js"></script>
+    <div class="padding"></div>
+    <div class="center">
+      <h1 class="change-color">&lt/script&gt</h1>
+    </div>
+  </div>
+  <div class="pi">
+    π
+  </div>
+</body>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script src="js/tetris.js"></script>
+<script src="js/elements.js"></script>
+<script src="js/typeit.js"></script>
+<script src="js/index.js"></script>
+
 </html>
