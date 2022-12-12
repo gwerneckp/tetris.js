@@ -10,6 +10,7 @@
 body {
     overflow-x: hidden;
     background-color: #000000;
+    height: 100fr;    
 }
 
 h1 {
