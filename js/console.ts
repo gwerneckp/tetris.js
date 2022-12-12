@@ -1,21 +1,35 @@
-const colorToCss = (color: string) => {
+const colorToCss = (color: string): string => {
   return `background-color: ${color}; padding-right: 9px;`;
 };
 
-const renderMatrix = (tetris: Tetris) => {
+type ColorIndex = "primary" | "secondary" | "background";
+
+type Colors = {
+  primary: string;
+  secondary: string;
+  background: string;
+};
+
+const colorsStyling: Colors = {
+  primary: colorToCss("green"),
+  secondary: colorToCss("white"),
+  background: colorToCss("black"),
+};
+
+const renderMatrix = (tetris: Tetris): void => {
   let linePixels: string = "";
   let lineStyling: Array<string> = [];
   for (let y = 3; y < tetris.matrix.length; y++) {
     for (let x in tetris.matrix[y]) {
       linePixels += "%c ";
       if (tetris.matrix[y][x] == 0) {
-        lineStyling.push(colorToCss("black"));
+        lineStyling.push(colorsStyling.background);
       }
       if (tetris.matrix[y][x] == 1) {
-        lineStyling.push(colorToCss("green"));
+        lineStyling.push(colorsStyling.primary);
       }
       if (tetris.matrix[y][x] == 2) {
-        lineStyling.push(colorToCss("white"));
+        lineStyling.push(colorsStyling.secondary);
       }
     }
     // the next two lines are a workaround for chrome console grouping similar lines
@@ -114,3 +128,22 @@ console.log(
   "color: green; font-size: 20px; font-weight: bold;",
   "font-size: 12px;"
 );
+
+// get all inputs of type color and add event listener
+const colorInputs = document.querySelectorAll("input[type=color]");
+colorInputs.forEach((input) => {
+  input.addEventListener("change", (e) => {
+    const target = e.target as HTMLInputElement;
+    const color = target.value;
+    const name = target.name;
+    console.log(
+      `%cChanged ${name} color to: %c${color} %c `,
+      "font-weight: bold;",
+      `color: ${color}`,
+      colorToCss(color)
+    );
+    if (name in colorsStyling) {
+      colorsStyling[name as ColorIndex] = colorToCss(color);
+    }
+  });
+});

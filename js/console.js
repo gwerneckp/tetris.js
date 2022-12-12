@@ -11,6 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const colorToCss = (color) => {
     return `background-color: ${color}; padding-right: 9px;`;
 };
+const colorsStyling = {
+    primary: colorToCss("green"),
+    secondary: colorToCss("white"),
+    background: colorToCss("black"),
+};
 const renderMatrix = (tetris) => {
     let linePixels = "";
     let lineStyling = [];
@@ -18,13 +23,13 @@ const renderMatrix = (tetris) => {
         for (let x in tetris.matrix[y]) {
             linePixels += "%c ";
             if (tetris.matrix[y][x] == 0) {
-                lineStyling.push(colorToCss("black"));
+                lineStyling.push(colorsStyling.background);
             }
             if (tetris.matrix[y][x] == 1) {
-                lineStyling.push(colorToCss("green"));
+                lineStyling.push(colorsStyling.primary);
             }
             if (tetris.matrix[y][x] == 2) {
-                lineStyling.push(colorToCss("white"));
+                lineStyling.push(colorsStyling.secondary);
             }
         }
         // the next two lines are a workaround for chrome console grouping similar lines
@@ -103,3 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 console.log("%cPress N to start the game %c(in the DOM)", "color: green; font-size: 20px; font-weight: bold;", "font-size: 12px;");
+// get all inputs of type color and add event listener
+const colorInputs = document.querySelectorAll("input[type=color]");
+colorInputs.forEach((input) => {
+    input.addEventListener("change", (e) => {
+        const target = e.target;
+        const color = target.value;
+        const name = target.name;
+        console.log(`%cChanged ${name} color to: %c${color} %c `, "font-weight: bold;", `color: ${color}`, colorToCss(color));
+        if (name in colorsStyling) {
+            colorsStyling[name] = colorToCss(color);
+        }
+    });
+});

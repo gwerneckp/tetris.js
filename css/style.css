@@ -13,14 +13,12 @@ body {
     height: 100fr;    
 }
 
-h1 {
+h1, p, a, label {
     color: #41ff00;
     font-family: "Consolas";
 }
 
 p {
-    font-family: "Consolas";
-    color: #41ff00;
     margin: 6px;
 }
 
@@ -53,4 +51,10 @@ p {
 
 .padding {
     padding: var(--padding);
+}
+
+/* input styling for color selector with a black border */
+input[type="color"] {
+    background-color: black;
+    border: transparent;
 }
